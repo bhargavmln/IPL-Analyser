@@ -94,4 +94,8 @@ public class Batsman {
 	public int getSixes() {
 		return sixes;
 	}
+
+	public int getBoundries() {
+		return this.fours + this.sixes;
+	}
 }

@@ -24,6 +24,12 @@ public class IPL_LeagueAnalyser {
 				.sorted(Comparator.comparing(Batsman::getStrikeRate).reversed()).collect(Collectors.toList());
 		return toJson(sortedStateBatsmanList);
 	}
+	
+	public String getMaximumBoundriesCricketers() {
+		List<Batsman> sortedStateBatsmanList = batsmanList.stream()
+				.sorted(Comparator.comparing(Batsman :: getBoundries).reversed()).collect(Collectors.toList());
+		return toJson(sortedStateBatsmanList);
+	}
 
 	public <E> String toJson(List<E> list) {
 		return new Gson().toJson(list);

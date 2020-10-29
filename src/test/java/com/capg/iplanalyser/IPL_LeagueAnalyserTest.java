@@ -37,4 +37,12 @@ public class IPL_LeagueAnalyserTest {
 		System.out.println(sortedBatsmanArray[0].getName());
 		assertEquals("Ishant Sharma", sortedBatsmanArray[0].getName());
 	}
+
+	@Test
+	public void givenCSVFile_shouldReturn_CricketersWith_MaximumBoundries() {
+		String sortedBatsmanData = ipl_LeagueAnalyser.getMaximumBoundriesCricketers();
+		Batsman[] sortedBatsmanArray = new Gson().fromJson(sortedBatsmanData, Batsman[].class);
+		System.out.println(sortedBatsmanArray[0].getName() + sortedBatsmanArray[0].getBoundries());
+		assertEquals("Andre Russell", sortedBatsmanArray[0].getName());
+	}
 }
