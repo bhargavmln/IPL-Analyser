@@ -35,7 +35,7 @@ public class IPL_LeagueAnalyserTest {
 		String sortedBatsmanData = ipl_LeagueAnalyser.getBestStrikeRateCricketers();
 		Batsman[] sortedBatsmanArray = new Gson().fromJson(sortedBatsmanData, Batsman[].class);
 		System.out.println(sortedBatsmanArray[0].getName());
-		assertEquals("Ishant Sharma", sortedBatsmanArray[0].getName());
+		assertEquals("Andre Russell", sortedBatsmanArray[0].getName());
 	}
 
 	@Test

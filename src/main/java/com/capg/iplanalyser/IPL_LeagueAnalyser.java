@@ -15,7 +15,8 @@ public class IPL_LeagueAnalyser {
 
 	public String getBestBattingAveragesCricketers() {
 		List<Batsman> sortedStateBatsmanList = batsmanList.stream()
-				.sorted(Comparator.comparing(Batsman::getAverage).reversed()).collect(Collectors.toList());
+				.sorted(Comparator.comparing(Batsman::getAverage).thenComparing(Batsman::getStrikeRate).reversed())
+				.collect(Collectors.toList());
 		return toJson(sortedStateBatsmanList);
 	}
 	
