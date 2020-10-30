@@ -65,7 +65,7 @@ public class IPL_LeagueAnalyserTest {
 	}
 	
 	@Test
-	public void givenCSVFile_shouldReturn_CricketersWith_MaximumBowlingStrikeRates() {
+	public void givenCSVFile_shouldReturn_CricketersWith_MaximumBowlingStrikeRatesAndHauls() {
 		String sortedBowlerData = ipl_LeagueAnalyser.getMaximumBowlingStrikeRatesCricketers();
 		Bowler[] sortedBowlerArray = new Gson().fromJson(sortedBowlerData, Bowler[].class);
 		System.out.println(sortedBowlerArray[0].getName() + sortedBowlerArray[0].getStrikeRate());

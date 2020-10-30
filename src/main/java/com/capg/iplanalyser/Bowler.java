@@ -87,4 +87,8 @@ public class Bowler {
 	public int getHaul_5W() {
 		return haul_5W;
 	}
+
+	public int getHauls() {
+		return this.haul_4W + this.haul_5W;
+	}
 }
