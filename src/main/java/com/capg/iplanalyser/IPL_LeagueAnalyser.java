@@ -57,6 +57,12 @@ public class IPL_LeagueAnalyser {
 				.collect(Collectors.toList());
 		return toJson(sortedBowlerList);
 	}
+	
+	public String getBestEconomyCricketers() {
+		List<Bowler> sortedBowlerList = bowlerList.stream().sorted(Comparator.comparing(Bowler::getStrikeRate))
+				.collect(Collectors.toList());
+		return toJson(sortedBowlerList);
+	}
 
 	public <E> String toJson(List<E> list) {
 		return new Gson().toJson(list);
