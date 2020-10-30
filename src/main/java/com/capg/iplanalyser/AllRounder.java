@@ -1,20 +1,12 @@
 package com.capg.iplanalyser;
 
-import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByPosition;
-
 public class AllRounder {
-	
-	@CsvBindByName(column = "PLAYER", required = true)
+
 	private String name;
-	
-	@CsvBindByPosition(position = 7)
-	@CsvBindByName(column = "Avg")
 	private double battingAverage;
-	
-	@CsvBindByPosition(position = 8)
-	@CsvBindByName(column = "Avg")
 	private double bowlingAverage;
+	private int runsScored;
+	private int wicketsTaken;
 
 	public String getName() {
 		return name;
@@ -40,9 +32,19 @@ public class AllRounder {
 		this.bowlingAverage = bowlingAverage;
 	}
 
-	@Override
-	public String toString() {
-		return "AllRounder [name=" + name + ", battingAverage=" + battingAverage + ", bowlingAverage=" + bowlingAverage
-				+ "]\n";
+	public int getRunsScored() {
+		return runsScored;
+	}
+
+	public int getWicketsTaken() {
+		return wicketsTaken;
+	}
+
+	public void setRunsScored(int runsScored) {
+		this.runsScored = runsScored;
+	}
+
+	public void setWicketsTaken(int wicketsTaken) {
+		this.wicketsTaken = wicketsTaken;
 	}
 }

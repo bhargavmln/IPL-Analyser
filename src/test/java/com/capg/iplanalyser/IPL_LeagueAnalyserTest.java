@@ -82,9 +82,16 @@ public class IPL_LeagueAnalyserTest {
 	
 	@Test
 	public void givenCSVFile_shouldReturn_CricketersWith_BattingAndBowlingAverages() {
-		String sortedBowlerData = ipl_LeagueAnalyser.getBattingAndBowlingAveragesCricketers();
-		AllRounder[] sortedAllRounderArray = new Gson().fromJson(sortedBowlerData, AllRounder[].class);
+		String sortedAllRounderData = ipl_LeagueAnalyser.getBattingAndBowlingAveragesCricketers();
+		AllRounder[] sortedAllRounderArray = new Gson().fromJson(sortedAllRounderData, AllRounder[].class);
 		assertEquals("Andre Russell", sortedAllRounderArray[0].getName());
+		assertEquals("Kagiso Rabada", sortedAllRounderArray[1].getName());
+	}
+	
+	@Test
+	public void givenCSVFile_shouldReturn_CricketersWith_MostRunsAndWickets() {
+		String sortedAllRounderData = ipl_LeagueAnalyser.getMostRunsAndWicketsCricketers();
+		AllRounder[] sortedAllRounderArray = new Gson().fromJson(sortedAllRounderData, AllRounder[].class);
 		assertEquals("Kagiso Rabada", sortedAllRounderArray[1].getName());
 	}
 }
