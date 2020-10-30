@@ -79,4 +79,12 @@ public class IPL_LeagueAnalyserTest {
 		Bowler[] sortedBowlerArray = new Gson().fromJson(sortedBowlerData, Bowler[].class);
 		assertEquals("Imran Tahir", sortedBowlerArray[0].getName());
 	}
+	
+	@Test
+	public void givenCSVFile_shouldReturn_CricketersWith_BattingAndBowlingAverages() {
+		String sortedBowlerData = ipl_LeagueAnalyser.getBattingAndBowlingAveragesCricketers();
+		AllRounder[] sortedAllRounderArray = new Gson().fromJson(sortedBowlerData, AllRounder[].class);
+		assertEquals("Andre Russell", sortedAllRounderArray[0].getName());
+		assertEquals("Kagiso Rabada", sortedAllRounderArray[1].getName());
+	}
 }
