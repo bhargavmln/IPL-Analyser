@@ -1,6 +1,6 @@
 package com.capg.iplanalyser;
 
-public class AllRounder {
+public class All_Rounder {
 
 	private String name;
 	private double battingAverage;

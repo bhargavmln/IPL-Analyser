@@ -13,48 +13,48 @@ public class IPL_LeagueAnalyser {
 	private List<Batsman> batsmanList = null;
 	private List<Bowler> bowlerList = null;
 
-	public void loadBatsmanData(String PATH) throws IPLAnalyserException {
-		batsmanList = new CSVBatsman().loadBatsmanList(PATH);
+	public void getBatsmanData(String PATH) throws IPLAnalyserException {
+		batsmanList = new BatsmanCSV().loadBatsmanList(PATH);
 	}
-	public void loadBowlerData(String BOWLER_CSV_PATH) throws IPLAnalyserException {
-		bowlerList = new CSVBowler().loadBowlerList(BOWLER_CSV_PATH);
+	public void getBowlerData(String BOWLER_CSV_PATH) throws IPLAnalyserException {
+		bowlerList = new BowlerCSV().loadBowlerList(BOWLER_CSV_PATH);
 	}
 
-	public String getBestBattingAveragesCricketers() {
+	public String getPlayerWithBestBattingAverages() {
 		List<Batsman> sortedStateBatsmanList = batsmanList.stream()
 				.sorted(Comparator.comparing(Batsman::getAverage).thenComparing(Batsman::getStrikeRate).reversed())
 				.collect(Collectors.toList());
 		return toJson(sortedStateBatsmanList);
 	}
 
-	public String getBestStrikeRateCricketers() {
+	public String getPlayerWithBestStrikeRate() {
 		List<Batsman> sortedStateBatsmanList = batsmanList.stream()
 				.sorted(Comparator.comparing(Batsman::getStrikeRate).thenComparing(Batsman::getBoundries).reversed())
 				.collect(Collectors.toList());
 		return toJson(sortedStateBatsmanList);
 	}
 
-	public String getMaximumBoundriesCricketers() {
+	public String getPlayerWithMaximumBoundries() {
 		List<Batsman> sortedStateBatsmanList = batsmanList.stream()
 				.sorted(Comparator.comparing(Batsman::getBoundries).reversed()).collect(Collectors.toList());
 		return toJson(sortedStateBatsmanList);
 	}
 
-	public String getMaximumRunsCricketers() {
+	public String getPlayerWithMaximumRuns() {
 		List<Batsman> sortedStateBatsmanList = batsmanList.stream()
 				.sorted(Comparator.comparing(Batsman::getRunsScored).thenComparing(Batsman::getAverage).reversed())
 				.collect(Collectors.toList());
 		return toJson(sortedStateBatsmanList);
 	}
 
-	public String getMaximumBowlingAverageCricketers() {
+	public String getPlayerWithMaximumBowlingAverage() {
 		List<Bowler> sortedBowlerList = bowlerList.stream().filter(n -> n.getAverage() > 0)
 				.sorted(Comparator.comparing(Bowler::getAverage).thenComparing(Bowler::getStrikeRate))
 				.collect(Collectors.toList());
 		return toJson(sortedBowlerList);
 	}
 	
-	public String getMaximumBowlingStrikeRatesCricketers() {
+	public String getPlayerWithMaximumBowlingStrikeRates() {
 		List<Bowler> sortedBowlerList = bowlerList.stream()
 				.filter(n -> n.getStrikeRate()>0)
 				.sorted(Comparator.comparing(Bowler::getStrikeRate).thenComparing(Bowler::getHauls))
@@ -62,21 +62,21 @@ public class IPL_LeagueAnalyser {
 		return toJson(sortedBowlerList);
 	}
 	
-	public String getBestEconomyCricketers() {
+	public String getPlayerWithBestEconomy() {
 		List<Bowler> sortedBowlerList = bowlerList.stream().sorted(Comparator.comparing(Bowler::getStrikeRate))
 				.collect(Collectors.toList());
 		return toJson(sortedBowlerList);
 	}
 	
-	public String getMaximumWicketsCricketers() {
+	public String getPlayerMaximumWickets() {
 		List<Bowler> sortedBowlerList = bowlerList.stream().filter(n -> n.getStrikeRate() > 0)
 				.sorted(Comparator.comparing(Bowler::getWicketsTaken).thenComparing(Bowler::getAverage).reversed())
 				.collect(Collectors.toList());
 		return toJson(sortedBowlerList);
 	}
 	
-	public List<AllRounder> getAllRoundersList(){
-		List<AllRounder> allRounderList = new ArrayList<AllRounder>();
+	public List<All_Rounder> getAllRounderPlayers(){
+		List<All_Rounder> allRounderList = new ArrayList<All_Rounder>();
 		Map<String, Batsman> batsmanMap = new HashMap<String, Batsman>();
 		Map<String, Bowler> bowlerMap = new HashMap<String, Bowler>();
 		batsmanList.forEach(n -> batsmanMap.put(n.getName(), n));
@@ -84,7 +84,7 @@ public class IPL_LeagueAnalyser {
 		
 		batsmanMap.forEach((k,v)-> {
 						if(bowlerMap.containsKey(k)) {
-							AllRounder a = new AllRounder();
+							All_Rounder a = new All_Rounder();
 							a.setName(k);
 							a.setBattingAverage(v.getAverage());
 							a.setRunsScored(v.getRunsScored());
@@ -98,44 +98,44 @@ public class IPL_LeagueAnalyser {
 		return allRounderList;
 	}
 	
-	public String getBattingAndBowlingAveragesCricketers() {
-		List<AllRounder> allRounderList = getAllRoundersList();
+	public String getPlayerWithBattingAndBowlingAverages() {
+		List<All_Rounder> allRounderList = getAllRounderPlayers();
 		
-		List<AllRounder> battingAllRounderList = allRounderList.stream()
+		List<All_Rounder> battingAllRounderList = allRounderList.stream()
 				.filter(n -> n.getBowlingAverage() > 0 & n.getBattingAverage() > 0)
-					  .sorted(Comparator.comparing(AllRounder::getBattingAverage).reversed())
+					  .sorted(Comparator.comparing(All_Rounder::getBattingAverage).reversed())
 					  .collect(Collectors.toList());
 		
-		List<AllRounder> bowlingAllRounderList = allRounderList.stream()
+		List<All_Rounder> bowlingAllRounderList = allRounderList.stream()
 				.filter(n -> n.getBowlingAverage() > 0 & n.getBattingAverage() > 0)
-				  .sorted(Comparator.comparing(AllRounder::getBowlingAverage))
+				  .sorted(Comparator.comparing(All_Rounder::getBowlingAverage))
 				  .collect(Collectors.toList());
-		List<AllRounder> sortedAllRounderList = new ArrayList<>();
+		List<All_Rounder> sortedAllRounderList = new ArrayList<>();
 		sortedAllRounderList.add(battingAllRounderList.get(0)); 
 		sortedAllRounderList.add(bowlingAllRounderList.get(0));
 		return toJson(sortedAllRounderList);
 	}
 	
-	public String getMostRunsAndWicketsCricketers() {
-		List<AllRounder> allRounderList = getAllRoundersList();
+	public String getPlayerWithMostRunsAndWickets() {
+		List<All_Rounder> allRounderList = getAllRounderPlayers();
 		
-		List<AllRounder> battingAllRounderList = allRounderList.stream()
+		List<All_Rounder> battingAllRounderList = allRounderList.stream()
 				.filter(n -> n.getBowlingAverage() > 0 & n.getBattingAverage() > 0)
-					  .sorted(Comparator.comparing(AllRounder::getRunsScored).reversed())
+					  .sorted(Comparator.comparing(All_Rounder::getRunsScored).reversed())
 					  .collect(Collectors.toList());
 		
-		List<AllRounder> bowlingAllRounderList = allRounderList.stream()
+		List<All_Rounder> bowlingAllRounderList = allRounderList.stream()
 				.filter(n -> n.getBowlingAverage() > 0 & n.getBattingAverage() > 0)
-				  .sorted(Comparator.comparing(AllRounder::getWicketsTaken).reversed())
+				  .sorted(Comparator.comparing(All_Rounder::getWicketsTaken).reversed())
 				  .collect(Collectors.toList());
 
-		List<AllRounder> sortedAllRounderList = new ArrayList<>();
+		List<All_Rounder> sortedAllRounderList = new ArrayList<>();
 		sortedAllRounderList.add(battingAllRounderList.get(0)); 
 		sortedAllRounderList.add(bowlingAllRounderList.get(0));
 		return toJson(sortedAllRounderList);
 	}
 	
-	public String getMaximumHundredsCricketers() {
+	public String getPlayerWithMaximumHundreds() {
 		List<Batsman> sortedBatsmanList = batsmanList.stream()
 				.filter(n -> n.getCenturies() > 0)
 				.sorted(Comparator.comparing(Batsman::getCenturies).reversed()
@@ -143,7 +143,16 @@ public class IPL_LeagueAnalyser {
 				.collect(Collectors.toList());
 		return toJson(sortedBatsmanList);
 	}
+	
 
+	public String getPlayerBestBattingAverageNoFifty() {
+		List<Batsman> sortedBatsmanList = batsmanList.stream()
+				.filter(n -> n.getCenturies() == 0 && n.getFifties() == 0)
+				.sorted(Comparator.comparing(Batsman::getAverage).reversed())
+				.collect(Collectors.toList());
+		return toJson(sortedBatsmanList);
+	}
+	
 	public <E> String toJson(List<E> list) {
 		return new Gson().toJson(list);
 	}
