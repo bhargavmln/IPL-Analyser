@@ -72,4 +72,11 @@ public class IPL_LeagueAnalyserTest {
 		Bowler[] sortedBowlerArray = new Gson().fromJson(sortedBowlerData, Bowler[].class);
 		assertEquals("Shivam Dube", sortedBowlerArray[0].getName());
 	}
+	
+	@Test
+	public void givenCSVFile_shouldReturn_CricketersWith_MaximumWickets_WithBestBowlingAverages() {
+		String sortedBowlerData = ipl_LeagueAnalyser.getMaximumWicketsCricketers();
+		Bowler[] sortedBowlerArray = new Gson().fromJson(sortedBowlerData, Bowler[].class);
+		assertEquals("Imran Tahir", sortedBowlerArray[0].getName());
+	}
 }

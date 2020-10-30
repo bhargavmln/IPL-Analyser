@@ -64,6 +64,13 @@ public class IPL_LeagueAnalyser {
 				.collect(Collectors.toList());
 		return toJson(sortedBowlerList);
 	}
+	
+	public String getMaximumWicketsCricketers() {
+		List<Bowler> sortedBowlerList = bowlerList.stream().filter(n -> n.getStrikeRate() > 0)
+				.sorted(Comparator.comparing(Bowler::getWicketsTaken).thenComparing(Bowler::getAverage).reversed())
+				.collect(Collectors.toList());
+		return toJson(sortedBowlerList);
+	}
 
 	public <E> String toJson(List<E> list) {
 		return new Gson().toJson(list);
